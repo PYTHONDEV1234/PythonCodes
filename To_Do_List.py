@@ -19,7 +19,7 @@ def save_list(list):
 def add_task(list):
     name = input("Enter the name of the task")
     time = input("Enter the time of which this task should be started, using an 00:00 format")
-    date = input("Enter the date this task is meant to be completed, using a m/d/yyyy")
+    date = input("Enter the date this task is meant to be completed, using a m/d/yyyy format")
     list[name] = {'time': time, 'date' : date}
     save_list(list)
     print("Task added successfully")
@@ -37,8 +37,8 @@ def search_list(list):
     name = input("Enter the name of the task to search")
     if name in list:
         print(f"name: {name}")
-        print(f"time: {time}")
-        print(f"date: {date}")
+        print(f"time: {list[name]['time']}")
+        print(f"date: {list[name]['date']}")
     else:
         print("Task not found")
 
@@ -48,15 +48,15 @@ def list_tasks(list):
     else:
         print("\n--->> > > > > > Tasks < < < < < <<--- \n")
         for name, info in list.items():
-            print(f"Name: {name} ---- Time: {time} ---= Date: {date} ")
+            print(f"Name: {name} ---- Time: {info['time']} ---= Date: {info['date']} ")
             print('___________________________________________')
 def main():
-    list = load_list
+    list = load_list()
     while True:
         print("1. Add Task")
         print("2. Remove Task")
         print("3. Search Task")
-        print("4. List All Contacts")
+        print("4. List All Tasks")
         print("5. Exit")
         choice = input("Enter an option: ")
         if choice == "1":
@@ -66,7 +66,7 @@ def main():
         elif choice == "3":
             search_list(list)
         elif choice == "4":
-            list_tasks(list):
+            list_tasks(list)
         elif choice == "5":
             break
         else:
